@@ -1,0 +1,63 @@
+{%extends 'base.html'%}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="container login">
+        <form method="POST" action=""enctype="multipart/form-data" >
+         {% csrf_token %}
+        <fieldset class="form-group">
+        <legend class="border-bottom mb-4">AddCourse</legend>
+            {{ form|crispy }}
+    <div class="form-group">
+            
+    </fieldset>
+    <div class="form-group" style ="margin-top:10px">
+        <button class="btn btn-outline-info" type="submit">Submit</button>
+    </div>
+    </div>
+<table class="table ">
+  <thead class="table-dark">Courses </thead>
+  <tbody>
+        <tr class="text-align-right">
+        <th>School Name</th>
+        <th>Course name<th>
+        <th>modify<th>
+        </tr>
+        
+        <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        </tr>
+  </tbody>
+</table>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Handle</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Larry</td>
+      <td>the Bird</td>
+      <td>@twitter</td>
+    </tr>
+  </tbody>
+{% endblock %}

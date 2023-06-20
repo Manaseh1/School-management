@@ -1,14 +1,205 @@
+{%load static%}
 
-    <div class="row" style="margin-bottom:-40px, ">
-      <div class="col">
-        <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
-          <ol class="breadcrumb mb-0">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item"><a href="#">User</a></li>
-            <li class="breadcrumb-item "><a href= #>User Profile</a></li>
-            <li class="breadcrumb-item" style ="top:0 ;right:0"><a href="{%url 'logout'%}">Logout</a></li>
+<style>
+          .container1 {
+          width: 160px;
+          height: 200%;
+          
+          background-color: #111111;
+          
 
-          </ol>
+        }
+        .box{
+          width: 160px;
+          height: 100%;
+          background-color: 17594A;
+          position: fixed;
+          text-align: left;
+          z-index: 1;
+          opacity: 0;
+          left:-500px;
+          pointer-events: none;
+          transition:0.3s;
+          top: 0;
+
+         
+        }
+        .active.box{
+          opacity: 1;
+          left:0px;
+          pointer-events: fill;
+        }
+        .menu_icon_box{
+          z-index: 2;
+          width:fit-content;
+          height: auto;
+          background-color: #fff;
+          margin:30px;
+          position:fixed;
+          cursor:pointer;
+          border-radius:4px;
+          top: 0;
+          
+        }
+        .line1 , .line2 , .line3{
+          width:40px;
+          height:4px;
+          background-color:black;
+          margin:10px 8px;
+          border-radius:4px;
+          transition:0.2s;
+        }
+        .active .line1{
+          transform: translate(0px,15px) rotate(45deg);
+        }
+        .active .line2{
+          opacity: 0;
+        }
+        .active .line3{
+          transform: translate(0px,-15px) rotate(-45deg);
+        }
+        nav{
+          padding-top:100px;
+
+        }
+        nav ul{
+          margin: 0px -40px;
+
+        }
+        nav ul li{
+          list-style: none;
+          margin-bottom: -15px;
+        }
+        nav ul li:hover{
+          color: white;
+          border-radius:8px;
+          transition:0.3s;
+        }
+       .none{
+          text-decoration: none;
+          padding-top:10px;
+       }
+        nav ul li a{
+          padding: 6px 8px 6px 16px;
+          text-decoration: none;
+          font-size: 20px;
+          color: #818181;
+          display: block;
+        
+          display:block;
+          
+        }
+body {font-family: "Lato", sans-serif;}
+
+.sidebar {
+  height: 100%;
+  width: 160px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111111;
+  overflow-x: hidden;
+  padding-top: 16px;
+  
+}
+
+.sidebar a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #818181;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: white;
+}
+
+.main {
+  margin-left: 160px; /* Same as the width of the sidenav */
+  padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidebar {padding-top: 15px;}
+  .sidebar a {font-size: 18px;}
+}
+</style>
+<!-- Navbar -->
+{%if user.is_anonymous%}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <!-- Container wrapper -->
+  <div class="container">
+    <!-- Navbar brand -->
+
+    <!-- Toggle button -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-mdb-toggle="collapse"
+      data-mdb-target="#navbarButtonsExample"
+      aria-controls="navbarButtonsExample"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Collapsible wrapper -->
+    <div class="collapse navbar-collapse" id="navbarButtonsExample">
+      <!-- Left links -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+   
+      </ul>
+      <!-- Left links -->
+      
+      <div class="d-flex align-items-center">
+        <button type="button" class="btn btn-link px-3 me-2">
+          Login
+        </button>
+        <button type="button" class="btn btn-primary me-3">
+          Sign up for free
+        </button>
+      </div>
+    
+    </div>
+    <!-- Collapsible wrapper -->
+  </div>
+  <!-- Container wrapper -->
+</nav>
+{%endif%}
+<!-- Navbar -->
+     {%if user.is_authenticated%}
+ <div>
+        <div class="menu_icon_box">
+          <div class="line1"></div>
+          <div class="line2"></div>
+          <div class="line3"></div>
+
+      </div>
+      <div class="box">
+        <nav>
+       
+          <ul>
+          
+            <li><a  class ="none"href="{%url 'profile'%}" style="color: aliceblue;"><i class="fa fa-fw fa-home"></i> Home<hr></a></li>
+            <li><a class ="none"href="#services" style="color: aliceblue;"><i class="fa fa-fw fa-id-card "></i> Profile<hr></a></li>
+            {%if user.role == 'A' %}
+            <li><a class ="none"href="{%url 'addcourse'%}" style="color: aliceblue;"><i class="fa fa-fw fa-book"></i> Addcourse<hr></a></li>
+            <li><a class ="none"href="{%url 'addschool'%}" style="color: aliceblue;"><i class="fa fa-fw fa-school"></i> AddSchool<hr></a></li>
+            {%endif%}
+            <li> <a class ="none"href="#contact" style="color: aliceblue;"><i class="fa fa-fw fa-envelope"></i> Contact<hr></a></li>
+            <li><a style="color: aliceblue;" href="{%url 'logout'%}"><i class="fa fa-fw fa-power-off"></i> logout<hr></a></li> 
+            <li><a href="javascript: history.back()" class ="none"href="" style="color: aliceblue;"><i class="fa fa-fw fa-arrow-left"></i> back<hr></a></li>
+ 
+          </ul>
+      
+
         </nav>
       </div>
-    </div>
+       {%endif%}
+<script src = '{% static "js/main.js" %}'>
+
+</script>
